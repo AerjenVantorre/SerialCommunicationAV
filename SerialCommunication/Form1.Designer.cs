@@ -118,7 +118,7 @@
             this.radioButtonVerbonden.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButtonVerbonden.AutoCheck = false;
             this.radioButtonVerbonden.AutoSize = true;
-            this.radioButtonVerbonden.Location = new System.Drawing.Point(562, 1);
+            this.radioButtonVerbonden.Location = new System.Drawing.Point(623, 17);
             this.radioButtonVerbonden.Name = "radioButtonVerbonden";
             this.radioButtonVerbonden.Size = new System.Drawing.Size(76, 17);
             this.radioButtonVerbonden.TabIndex = 8;
@@ -166,10 +166,10 @@
             this.tabControl.Controls.Add(this.tabPageOefening3);
             this.tabControl.Controls.Add(this.tabPageOefening4);
             this.tabControl.Controls.Add(this.tabPageOefening5);
-            this.tabControl.Location = new System.Drawing.Point(12, 53);
+            this.tabControl.Location = new System.Drawing.Point(12, 40);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(631, 532);
+            this.tabControl.Size = new System.Drawing.Size(691, 388);
             this.tabControl.TabIndex = 9;
             // 
             // tabPageInstellingen
@@ -188,8 +188,8 @@
             this.tabPageInstellingen.Controls.Add(this.label4);
             this.tabPageInstellingen.Location = new System.Drawing.Point(4, 22);
             this.tabPageInstellingen.Name = "tabPageInstellingen";
-            this.tabPageInstellingen.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageInstellingen.Size = new System.Drawing.Size(623, 506);
+            this.tabPageInstellingen.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageInstellingen.Size = new System.Drawing.Size(683, 362);
             this.tabPageInstellingen.TabIndex = 2;
             this.tabPageInstellingen.Text = "Instellingen";
             this.tabPageInstellingen.UseVisualStyleBackColor = true;
@@ -297,7 +297,7 @@
             this.groupBox2.Controls.Add(this.radioButtonStopbitsNone);
             this.groupBox2.Location = new System.Drawing.Point(105, 179);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(377, 49);
+            this.groupBox2.Size = new System.Drawing.Size(377, 167);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             // 
@@ -498,8 +498,8 @@
             this.tabPageOefening1.Controls.Add(this.checkBoxDigital2);
             this.tabPageOefening1.Location = new System.Drawing.Point(4, 22);
             this.tabPageOefening1.Name = "tabPageOefening1";
-            this.tabPageOefening1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageOefening1.Size = new System.Drawing.Size(11, 0);
+            this.tabPageOefening1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageOefening1.Size = new System.Drawing.Size(736, 362);
             this.tabPageOefening1.TabIndex = 0;
             this.tabPageOefening1.Text = "Oefening 1";
             this.tabPageOefening1.UseVisualStyleBackColor = true;
@@ -555,8 +555,8 @@
             this.tabPageOefening2.Controls.Add(this.pictureBox2);
             this.tabPageOefening2.Location = new System.Drawing.Point(4, 22);
             this.tabPageOefening2.Name = "tabPageOefening2";
-            this.tabPageOefening2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageOefening2.Size = new System.Drawing.Size(11, 0);
+            this.tabPageOefening2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageOefening2.Size = new System.Drawing.Size(736, 362);
             this.tabPageOefening2.TabIndex = 1;
             this.tabPageOefening2.Text = "Oefening 2";
             this.tabPageOefening2.UseVisualStyleBackColor = true;
@@ -636,8 +636,8 @@
             this.tabPageOefening3.Controls.Add(this.pictureBox3);
             this.tabPageOefening3.Location = new System.Drawing.Point(4, 22);
             this.tabPageOefening3.Name = "tabPageOefening3";
-            this.tabPageOefening3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageOefening3.Size = new System.Drawing.Size(11, 0);
+            this.tabPageOefening3.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageOefening3.Size = new System.Drawing.Size(736, 362);
             this.tabPageOefening3.TabIndex = 3;
             this.tabPageOefening3.Text = "Oefening 3";
             this.tabPageOefening3.UseVisualStyleBackColor = true;
@@ -694,8 +694,8 @@
             this.tabPageOefening4.Controls.Add(this.pictureBox4);
             this.tabPageOefening4.Location = new System.Drawing.Point(4, 22);
             this.tabPageOefening4.Name = "tabPageOefening4";
-            this.tabPageOefening4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageOefening4.Size = new System.Drawing.Size(11, 0);
+            this.tabPageOefening4.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageOefening4.Size = new System.Drawing.Size(736, 362);
             this.tabPageOefening4.TabIndex = 4;
             this.tabPageOefening4.Text = "Oefening 4";
             this.tabPageOefening4.UseVisualStyleBackColor = true;
@@ -729,8 +729,8 @@
             this.tabPageOefening5.Controls.Add(this.pictureBox5);
             this.tabPageOefening5.Location = new System.Drawing.Point(4, 22);
             this.tabPageOefening5.Name = "tabPageOefening5";
-            this.tabPageOefening5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageOefening5.Size = new System.Drawing.Size(11, 0);
+            this.tabPageOefening5.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageOefening5.Size = new System.Drawing.Size(736, 362);
             this.tabPageOefening5.TabIndex = 5;
             this.tabPageOefening5.Text = "Oefening 5";
             this.tabPageOefening5.UseVisualStyleBackColor = true;
@@ -790,9 +790,9 @@
             this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.labelStatus});
-            this.statusStrip.Location = new System.Drawing.Point(0, 700);
+            this.statusStrip.Location = new System.Drawing.Point(0, 439);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(984, 11);
+            this.statusStrip.Size = new System.Drawing.Size(715, 22);
             this.statusStrip.TabIndex = 10;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -810,7 +810,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1968, 1422);
+            this.ClientSize = new System.Drawing.Size(715, 461);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.radioButtonVerbonden);
