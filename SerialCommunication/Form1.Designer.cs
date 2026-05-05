@@ -91,6 +91,9 @@
             this.labelStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.serialPortArduino = new System.IO.Ports.SerialPort(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.timerOefening5 = new System.Windows.Forms.Timer(this.components);
+            this.labelAnalog00 = new System.Windows.Forms.Label();
+            this.labelAnalog11 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabPageInstellingen.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -176,6 +179,7 @@
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(1382, 746);
             this.tabControl.TabIndex = 9;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // tabPageInstellingen
             // 
@@ -780,6 +784,8 @@
             // 
             // tabPageOefening5
             // 
+            this.tabPageOefening5.Controls.Add(this.labelAnalog11);
+            this.tabPageOefening5.Controls.Add(this.labelAnalog00);
             this.tabPageOefening5.Controls.Add(this.labelHuidigeTemp);
             this.tabPageOefening5.Controls.Add(this.label11);
             this.tabPageOefening5.Controls.Add(this.labelGewensteTemp);
@@ -870,6 +876,29 @@
             // 
             this.serialPortArduino.ReadTimeout = 1000;
             this.serialPortArduino.WriteTimeout = 1000;
+            // 
+            // timerOefening5
+            // 
+            this.timerOefening5.Interval = 1000;
+            this.timerOefening5.Tick += new System.EventHandler(this.timerOefening5_Tick);
+            // 
+            // labelAnalog00
+            // 
+            this.labelAnalog00.AutoSize = true;
+            this.labelAnalog00.Location = new System.Drawing.Point(653, 96);
+            this.labelAnalog00.Name = "labelAnalog00";
+            this.labelAnalog00.Size = new System.Drawing.Size(90, 25);
+            this.labelAnalog00.TabIndex = 5;
+            this.labelAnalog00.Text = "             ";
+            // 
+            // labelAnalog11
+            // 
+            this.labelAnalog11.AutoSize = true;
+            this.labelAnalog11.Location = new System.Drawing.Point(798, 108);
+            this.labelAnalog11.Name = "labelAnalog11";
+            this.labelAnalog11.Size = new System.Drawing.Size(96, 25);
+            this.labelAnalog11.TabIndex = 6;
+            this.labelAnalog11.Text = "              ";
             // 
             // Form1
             // 
@@ -984,6 +1013,9 @@
         private System.Windows.Forms.ToolStripStatusLabel labelStatus;
         private System.IO.Ports.SerialPort serialPortArduino;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Timer timerOefening5;
+        private System.Windows.Forms.Label labelAnalog11;
+        private System.Windows.Forms.Label labelAnalog00;
     }
 }
 

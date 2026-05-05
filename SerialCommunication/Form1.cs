@@ -190,5 +190,80 @@ namespace SerialCommunication
                 buttonConnect.Text = "Connect";
             }
         }
+
+        
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl.SelectedTab == tabPageOefening5)
+            {
+                timerOefening5.Start();
+            }
+            else
+            {
+                timerOefening5.Stop();
+            }
+        }
+
+
+        private void timerOefening5_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                // Controle: is seriële verbinding actief?
+                if (serialPortArduino.IsOpen)
+                {
+                    serialPortArduino.ReadExisting();
+                    string commando = "get a0";
+                    serialPortArduino.WriteLine(commando);
+                    string antwoord = serialPortArduino.ReadLine();
+                    antwoord = antwoord.TrimEnd();
+                    antwoord = antwoord.Substring(4);
+                    
+                   int value = Int32.Parse( antwoord );
+                    labelAnalog00.Text = value.ToString();
+                    double doubleValue = value;
+                    double gewensteTemp =  (0.0391 * doubleValue + 5);
+                    int intGewensteTemp = (int)Math.Round(gewensteTemp); 
+                    labelGewensteTemp.Text = intGewensteTemp.ToString() + "°C";
+
+                    serialPortArduino.ReadExisting();
+                    string commando2 = "get a1";
+                    serialPortArduino.WriteLine(commando2);
+                    string antwoord2 = serialPortArduino.ReadLine();
+                    antwoord2 = antwoord2.TrimEnd();
+                    antwoord2 = antwoord2.Substring(4);
+
+                    int value2 = Int32.Parse(antwoord2);
+                    labelAnalog11.Text = value2.ToString();
+                    double doubleValue2 = value2;
+                    double huidigeTemp = (0.489 * doubleValue2); // dit is de huidige temp in kelvin
+                    double kelvinNaarCelcius = huidigeTemp - 273.15;
+                    int intHuidigeTemp = (int)Math.Round(kelvinNaarCelcius) * -1;
+                    labelHuidigeTemp.Text = intHuidigeTemp.ToString() + "°C";
+
+                    string commando3;
+                    if (intHuidigeTemp < intGewensteTemp)
+                    {
+                        commando3 = "set d2 high";
+                    }
+                    else commando3 = "set d2 low";
+                    serialPortArduino.WriteLine(commando3);
+
+                }
+                else
+                {
+                    // Geen verbinding
+                    labelStatus.Text = "Geen verbinding";
+                }
+            }
+            catch (Exception exception)
+            {
+                labelStatus.Text = "Error: " + exception.Message;
+                serialPortArduino.Close();
+                radioButtonVerbonden.Checked = false;
+                buttonConnect.Text = "Connect";
+            }
+        }
+
     }
 }
