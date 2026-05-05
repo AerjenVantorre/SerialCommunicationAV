@@ -223,8 +223,8 @@ namespace SerialCommunication
                     labelAnalog00.Text = value.ToString();
                     double doubleValue = value;
                     double gewensteTemp =  (0.0391 * doubleValue + 5);
-                    int intGewensteTemp = (int)Math.Round(gewensteTemp); 
-                    labelGewensteTemp.Text = intGewensteTemp.ToString() + "°C";
+                    gewensteTemp = Math.Round(gewensteTemp, 1); 
+                    labelGewensteTemp.Text = gewensteTemp.ToString() + "°C";
 
                     serialPortArduino.ReadExisting();
                     string commando2 = "get a1";
@@ -238,11 +238,11 @@ namespace SerialCommunication
                     double doubleValue2 = value2;
                     double huidigeTemp = (0.489 * doubleValue2); // dit is de huidige temp in kelvin
                     double kelvinNaarCelcius = huidigeTemp - 273.15;
-                    int intHuidigeTemp = (int)Math.Round(kelvinNaarCelcius) * -1;
-                    labelHuidigeTemp.Text = intHuidigeTemp.ToString() + "°C";
+                    huidigeTemp = Math.Round(kelvinNaarCelcius, 1);
+                    labelHuidigeTemp.Text = huidigeTemp.ToString() + "°C";
 
                     string commando3;
-                    if (intHuidigeTemp < intGewensteTemp)
+                    if (huidigeTemp < gewensteTemp)
                     {
                         commando3 = "set d2 high";
                     }
