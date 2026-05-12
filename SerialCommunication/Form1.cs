@@ -192,7 +192,7 @@ namespace SerialCommunication
         }
 
         
-        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        private void tabControl_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             if (tabControl.SelectedTab == tabPageOefening5)
             {
@@ -224,7 +224,7 @@ namespace SerialCommunication
                     double doubleValue = value;
                     double gewensteTemp =  (0.0391 * doubleValue + 5);
                     gewensteTemp = Math.Round(gewensteTemp, 1); 
-                    labelGewensteTemp.Text = gewensteTemp.ToString() + "°C";
+                    labelGewensteTemp.Text = gewensteTemp.ToString("0.0") + "°C";
 
                     serialPortArduino.ReadExisting();
                     string commando2 = "get a1";
@@ -232,14 +232,14 @@ namespace SerialCommunication
                     string antwoord2 = serialPortArduino.ReadLine();
                     antwoord2 = antwoord2.TrimEnd();
                     antwoord2 = antwoord2.Substring(4);
-
+                    // ik gebruikte een LM335A sensor in plaats van een LM35 
                     int value2 = Int32.Parse(antwoord2);
                     labelAnalog11.Text = value2.ToString();
                     double doubleValue2 = value2;
                     double huidigeTemp = (0.489 * doubleValue2); // dit is de huidige temp in kelvin
                     double kelvinNaarCelcius = huidigeTemp - 273.15;
                     huidigeTemp = Math.Round(kelvinNaarCelcius, 1);
-                    labelHuidigeTemp.Text = huidigeTemp.ToString() + "°C";
+                    labelHuidigeTemp.Text = huidigeTemp.ToString("0.0") + "°C";
 
                     string commando3;
                     if (huidigeTemp < gewensteTemp)
@@ -264,6 +264,147 @@ namespace SerialCommunication
                 buttonConnect.Text = "Connect";
             }
         }
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl.SelectedTab == tabPageTemperatuurAlarm)
+            {
+                timerTemperatuurAlarm.Start();
+            }
+            else
+            {
+                timerTemperatuurAlarm.Stop();
+            }
+        }
 
+        private void timerTemperatuurAlarm_Tick(object sender, EventArgs e)
+        {
+            int toestand = 1;
+            try
+            {
+                // Controle: is seriële verbinding actief?
+                if (serialPortArduino.IsOpen)
+                {
+                    serialPortArduino.ReadExisting();
+                    string commando = "get a0";
+                    serialPortArduino.WriteLine(commando);
+                    string antwoord = serialPortArduino.ReadLine();
+                    antwoord = antwoord.TrimEnd();
+                    antwoord = antwoord.Substring(4);
+
+                    int value = Int32.Parse(antwoord);
+                    labelAnalog00.Text = value.ToString();
+                    double doubleValue = value;
+                    double alarmTemp = (0.0391 * doubleValue + 5);
+                    alarmTemp = Math.Round(alarmTemp, 1);
+                    labelAlarmTemp.Text = alarmTemp.ToString("0.0") + "°C";
+
+                    serialPortArduino.ReadExisting();
+                    string commando2 = "get a1";
+                    serialPortArduino.WriteLine(commando2);
+                    string antwoord2 = serialPortArduino.ReadLine();
+                    antwoord2 = antwoord2.TrimEnd();
+                    antwoord2 = antwoord2.Substring(4);
+                    // ik gebruikte een LM335A sensor in plaats van een LM35 
+                    int value2 = Int32.Parse(antwoord2);
+                    labelAnalog11.Text = value2.ToString();
+                    double doubleValue2 = value2;
+                    double huidigeTemp = (0.489 * doubleValue2); // dit is de huidige temp in kelvin
+                    double kelvinNaarCelcius = huidigeTemp - 273.15;
+                    huidigeTemp = Math.Round(kelvinNaarCelcius, 1);
+                    labelHuidigeTemperatuur2.Text = huidigeTemp.ToString("0.0") + "°C";
+
+                    serialPortArduino.ReadExisting();
+                    string commando3 = "get d5";
+                    serialPortArduino.WriteLine(commando3);
+                    string antwoord3 = serialPortArduino.ReadLine();
+                    antwoord3 = antwoord3.TrimEnd();
+                    bool buttonBevestig = antwoord3 == "d5: 1";
+
+
+
+
+
+                    if (toestand == 0 && huidigeTemp >= alarmTemp)
+                    {
+                        toestand = 1;
+                    }
+                    if (toestand == 1 && buttonBevestig == true)
+                    {
+                        if (huidigeTemp < alarmTemp)
+                        {
+                            toestand = 0;
+
+
+                        }
+                        else
+                        {
+                            toestand = 2;
+                        }
+
+                    }
+                    if (toestand == 2 && huidigeTemp < alarmTemp)
+                    {
+                        toestand = 0;
+                    }
+
+                    if (toestand == 0)
+                    {
+                        labelStatus2.Text = "OK";
+                    }
+                    else if (toestand == 1)
+                    {
+                        labelStatus2.Text = "ALARM";
+                    }
+                    else if (toestand == 2)
+                    {
+                        labelStatus2.Text = "BEVESTIGD";
+                    }
+
+                    string commando4;
+                    string commando5;
+                    if (toestand == 0)
+                    {
+                        commando4 = "set d2 low";
+                        commando5 = "set d3 low";
+                        serialPortArduino.WriteLine(commando4);
+                        serialPortArduino.WriteLine(commando5);
+                    }
+                    
+                    else if (toestand == 1)
+                    {
+                        commando4 = "set d2 high";
+                        commando5 = "set d3 high";
+                        serialPortArduino.WriteLine(commando4);
+                        serialPortArduino.WriteLine(commando5);
+                    }
+                    else if (toestand == 2) 
+                    {
+                        commando4 = "set d2 high";
+                        commando5 = "set d3 low";
+                        serialPortArduino.WriteLine(commando4);
+                        serialPortArduino.WriteLine(commando5);
+                    }
+                    
+
+
+
+
+
+
+                }
+                else
+                {
+                    // Geen verbinding
+                    labelStatus.Text = "Geen verbinding";
+                }
+            }
+            catch (Exception exception)
+            {
+                labelStatus.Text = "Error: " + exception.Message;
+                serialPortArduino.Close();
+                radioButtonVerbonden.Checked = false;
+                buttonConnect.Text = "Connect";
+            }
+        }
     }
 }
