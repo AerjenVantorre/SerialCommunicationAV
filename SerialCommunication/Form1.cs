@@ -276,9 +276,10 @@ namespace SerialCommunication
             }
         }
 
+        int toestand = 0;
         private void timerTemperatuurAlarm_Tick(object sender, EventArgs e)
         {
-            int toestand = 1;
+            
             try
             {
                 // Controle: is seriële verbinding actief?
@@ -294,7 +295,7 @@ namespace SerialCommunication
                     int value = Int32.Parse(antwoord);
                     labelAnalog00.Text = value.ToString();
                     double doubleValue = value;
-                    double alarmTemp = (0.0391 * doubleValue + 5);
+                    double alarmTemp = (0.0684 * doubleValue - 10);
                     alarmTemp = Math.Round(alarmTemp, 1);
                     labelAlarmTemp.Text = alarmTemp.ToString("0.0") + "°C";
 
@@ -328,24 +329,19 @@ namespace SerialCommunication
                     {
                         toestand = 1;
                     }
-                    if (toestand == 1 && buttonBevestig == true)
-                    {
-                        if (huidigeTemp < alarmTemp)
-                        {
-                            toestand = 0;
-
-
-                        }
-                        else
-                        {
-                            toestand = 2;
-                        }
-
-                    }
-                    if (toestand == 2 && huidigeTemp < alarmTemp)
+                    else if (toestand == 1 && buttonBevestig == true && huidigeTemp < alarmTemp)
                     {
                         toestand = 0;
                     }
+                    else if (toestand == 1 && buttonBevestig == true) 
+                    { 
+                        toestand = 2; 
+                    }
+                    else if (toestand == 2 && huidigeTemp < alarmTemp)
+                    {
+                        toestand = 0;
+                    }
+                    
 
                     if (toestand == 0)
                     {
